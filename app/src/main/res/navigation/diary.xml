@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/diary"
+    app:startDestination="@id/diaryFragment">
+
+    <fragment
+        android:id="@+id/diaryFragment"
+        android:name="com.example.macrostracker.ui.diary.DiaryFragment"
+        android:label="Diary"
+        tools:layout="@layout/fragment_diary" >
+        <action
+            android:id="@+id/action_diaryFragment_to_foodListFragment"
+            app:destination="@id/foodListFragment" />
+        <action
+            android:id="@+id/action_diaryFragment_to_editMealsFragment"
+            app:destination="@id/editMeals" />
+        <action
+            android:id="@+id/action_diaryFragment_to_editEntryFragment"
+            app:destination="@id/editEntryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/foodListFragment"
+        android:name="com.example.macrostracker.ui.diary.foodList.FoodListFragment"
+        android:label="{mealName}"
+        tools:layout="@layout/fragment_food_list">
+        <argument
+            android:name="mealId"
+            app:argType="long" />
+        <argument
+            android:name="mealName"
+            app:argType="string" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_foodListFragment_to_createFoodFragment"
+            app:destination="@id/createFoodFragment" />
+        <action
+            android:id="@+id/action_foodListFragment_to_entryFragment"
+            app:destination="@id/entryFragment" />
+        <action
+            android:id="@+id/action_foodListFragment_to_barcodeScannerFragment"
+            app:destination="@id/barcodeScannerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createFoodFragment"
+        android:name="com.example.macrostracker.ui.diary.foodList.createFood.CreateFoodFragment"
+        android:label="@string/create_food_title"
+        tools:layout="@layout/fragment_create_food" />
+    <fragment
+        android:id="@+id/entryFragment"
+        android:name="com.example.macrostracker.ui.diary.foodList.createEntry.CreateEntryFragment"
+        android:label="{foodName}"
+        tools:layout="@layout/fragment_entry">
+        <argument
+            android:name="mealId"
+            app:argType="long" />
+        <argument
+            android:name="foodId"
+            app:argType="long" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+        <argument
+            android:name="foodName"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/barcodeScannerFragment"
+        android:name="com.example.macrostracker.ui.diary.foodList.barcodeScanner.BarcodeScannerFragment"
+        android:label="fragment_barcode_scanner"
+        tools:layout="@layout/fragment_barcode_scanner" >
+        <action
+            android:id="@+id/action_barcodeScannerFragment_to_barcodeFoodFragment"
+            app:destination="@id/barcodeFoodFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/barcodeFoodFragment"
+        android:name="com.example.macrostracker.ui.diary.foodList.barcodeScanner.BarcodeFoodFragment"
+        android:label="@string/scanned_food"
+        tools:layout="@layout/fragment_barcode_food">
+        <argument
+            android:name="barcode"
+            app:argType="string" />
+    </fragment>
+    <navigation android:id="@+id/editMeals"
+        app:startDestination="@id/editMealsFragment">
+        <fragment
+            android:id="@+id/editMealsFragment"
+            android:name="com.example.macrostracker.ui.diary.editMeals.EditMealsFragment"
+            android:label="@string/meals_title"
+            tools:layout="@layout/fragment_edit_meals" >
+            <action
+                android:id="@+id/action_editMealsFragment_to_editMealNameDialogFragment3"
+                app:destination="@id/editMealNameDialogFragment3" />
+        </fragment>
+        <dialog
+            android:id="@+id/editMealNameDialogFragment3"
+            android:name="com.example.macrostracker.ui.diary.editMeals.EditMealNameDialogFragment"
+            android:label="EditMealNameDialogFragment" >
+            <argument
+                android:name="mealId"
+                app:argType="long" />
+        </dialog>
+    </navigation>
+    <fragment
+        android:id="@+id/editEntryFragment"
+        android:name="com.example.macrostracker.ui.diary.editEntry.EditEntryFragment"
+        android:label="{foodName}">
+        <argument
+            android:name="foodName"
+            app:argType="string" />
+        <argument
+            android:name="foodId"
+            app:argType="long" />
+        <argument
+            android:name="entryId"
+            app:argType="long" />
+    </fragment>
+</navigation>

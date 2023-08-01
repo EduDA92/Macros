@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.user.UserFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/topAppBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            app:menu="@menu/top_app_bar"
+            app:navigationIcon="@drawable/round_arrow_back_24"
+            app:title="@string/userPageTitle"
+            app:titleCentered="true" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/userProfileTitle"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="@string/profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topAppBarLayout" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/editButton"
+        style="?attr/materialIconButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:contentDescription="@string/edit_profile_data"
+        app:icon="@drawable/round_settings_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topAppBarLayout" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/userProfileDivider9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userProfileTitle" />
+
+    <!--TextView & EditText for height input-->
+
+    <TextView
+        android:id="@+id/heightText"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/heightTextNumber"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userProfileDivider9"
+        tools:text="Height (cm)" />
+
+    <TextView
+        android:id="@+id/heightTextNumber"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:gravity="end|center_vertical"
+        android:padding="8dp"
+        android:textColor="?attr/colorPrimaryVariant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/heightText"
+        app:layout_constraintTop_toBottomOf="@+id/userProfileDivider9"
+        tools:text="160" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/userProfileDivider2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/heightText" />
+
+    <!--TextView & EditText for weight input-->
+
+    <TextView
+        android:id="@+id/weightText"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/weightTextNumber"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userProfileDivider2"
+        tools:text="Weight (kg)" />
+
+    <TextView
+        android:id="@+id/weightTextNumber"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:gravity="end|center_vertical"
+        android:padding="8dp"
+        android:textColor="?attr/colorPrimaryVariant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/weightText"
+        app:layout_constraintTop_toTopOf="@id/userProfileDivider2"
+        tools:text="60" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/userProfileDivider3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/weightText" />
+
+    <!--TextView & EditText for age input-->
+
+    <TextView
+        android:id="@+id/ageText"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="@string/age"
+        app:layout_constraintEnd_toStartOf="@+id/ageTextNumber"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userProfileDivider3" />
+
+    <TextView
+        android:id="@+id/ageTextNumber"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:autofillHints="Age"
+        android:gravity="end|center_vertical"
+        android:padding="8dp"
+        android:textColor="?attr/colorPrimaryVariant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ageText"
+        app:layout_constraintTop_toTopOf="@id/userProfileDivider3"
+        tools:text="25" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/userProfileDivider4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ageText" />
+
+    <!--TextView & EditText for sex input-->
+
+    <TextView
+        android:id="@+id/genderText"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="@string/gender"
+        app:layout_constraintEnd_toStartOf="@+id/setGenderText"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userProfileDivider4" />
+
+    <TextView
+        android:id="@+id/setGenderText"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:gravity="end|center_vertical"
+        android:padding="8dp"
+        android:textColor="?attr/colorPrimaryVariant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/genderText"
+        app:layout_constraintTop_toBottomOf="@id/userProfileDivider4"
+        tools:text="Male" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/userProfileDivider5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/genderText" />
+
+    <!--TextView & EditText for Activity Level input-->
+
+    <TextView
+        android:id="@+id/activityLevelText"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="@string/activity_level"
+        app:layout_constraintEnd_toStartOf="@+id/setActivityLevelText"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userProfileDivider5" />
+
+    <TextView
+        android:id="@+id/setActivityLevelText"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:gravity="end|center_vertical"
+        android:padding="8dp"
+        android:textColor="?attr/colorPrimaryVariant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/activityLevelText"
+        app:layout_constraintTop_toBottomOf="@id/userProfileDivider5"
+        tools:text="Activity Level" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/userProfileDivider6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activityLevelText" />
+
+    <!--TextView & EditText for Objective input-->
+
+    <TextView
+        android:id="@+id/objectiveLevelText"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="@string/objective"
+        app:layout_constraintEnd_toStartOf="@+id/setObjectiveLevelText"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userProfileDivider6" />
+
+    <TextView
+        android:id="@+id/setObjectiveLevelText"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:gravity="end|center_vertical"
+        android:padding="8dp"
+        android:textColor="?attr/colorPrimaryVariant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/objectiveLevelText"
+        app:layout_constraintTop_toBottomOf="@id/userProfileDivider6"
+        tools:text="Objective" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/userProfileDivider10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/objectiveLevelText" />
+
+    <!-- Profile title -->
+
+    <TextView
+        android:id="@+id/resultsProfileTitle"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="@string/results"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/objectiveLevelText" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/userProfileDivider11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/resultsProfileTitle" />
+
+
+
+    <!--TextViews for BMR display-->
+
+    <TextView
+        android:id="@+id/bmrText"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="@string/bmr"
+        app:layout_constraintEnd_toStartOf="@+id/setBmrText"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/resultsProfileTitle" />
+
+    <TextView
+        android:id="@+id/setBmrText"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:gravity="end|center_vertical"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/bmrText"
+        app:layout_constraintTop_toBottomOf="@id/resultsProfileTitle"
+        tools:text="1551 Kcal" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/userProfileDivider7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bmrText" />
+
+    <!--TextViews for IMC display-->
+
+    <TextView
+        android:id="@+id/imcText"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="@string/imc"
+        app:layout_constraintEnd_toStartOf="@+id/setImcText"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userProfileDivider7" />
+
+    <TextView
+        android:id="@+id/setImcText"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:gravity="end|center_vertical"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imcText"
+        app:layout_constraintTop_toBottomOf="@id/userProfileDivider7"
+        tools:text="22.04" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/userProfileDivider8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imcText" />
+
+    <TextView
+        android:id="@+id/userFoodList"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:drawableEnd="@drawable/round_navigate_next_24"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="@string/userFoodList"
+        android:background="?attr/selectableItemBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userProfileDivider8" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/userProfileDivider12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userFoodList" />
+
+    <TextView
+        android:id="@+id/userRecipeList"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:drawableEnd="@drawable/round_navigate_next_24"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="@string/userRecipeList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userProfileDivider12" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/userProfileDivider13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userRecipeList" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

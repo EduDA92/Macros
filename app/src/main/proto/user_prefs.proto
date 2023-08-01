@@ -1,0 +1,46 @@
+syntax = "proto3";
+option java_package = "com.example.macrostracker";
+option java_multiple_files = true;
+
+message UserPreferences {
+
+  double height = 1;
+  double weight = 2;
+  int32 age = 3;
+  Gender gender = 4;
+  WeightUnits weightUnits = 5;
+  HeightUnits heightUnits = 6;
+  Objective objective = 7;
+  ActivityLevel activityLevel = 8;
+  bool firstTime = 9;
+
+  enum Gender {
+    MALE = 0;
+    FEMALE = 1;
+  }
+
+  enum WeightUnits{
+    KG = 0;
+    LB = 1;
+  }
+
+  enum HeightUnits{
+    M = 0;
+    FT = 1;
+  }
+
+  enum Objective{
+    LOSE_WEIGHT = 0;
+    MAINTAIN_WEIGHT = 1;
+    GAIN_WEIGHT = 2;
+  }
+
+  enum ActivityLevel{
+    SEDENTARY = 0;
+    LIGHTLY_ACTIVE  = 1;
+    MODERATELY_ACTIVE = 2;
+    ACTIVE = 3;
+    VERY_ACTIVE = 4;
+  }
+
+}

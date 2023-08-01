@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.diary.foodList.createFood.CreateFoodFragment">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/topAppBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/add_food_top_app_bar"
+            app:navigationIcon="@drawable/round_arrow_back_24"
+            app:titleCentered="true" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/foodNameTextField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/food_name_label"
+        android:padding="8dp"
+        app:layout_constraintEnd_toStartOf="@id/ServingSizeTextField"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topAppBarLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/foodNameInputTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ServingSizeTextField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/food_serving_label"
+        android:padding="8dp"
+        app:layout_constraintStart_toEndOf="@id/foodNameTextField"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topAppBarLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/servingSizeInputTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/brandTextField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/foodNameTextField"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="@string/brand_label">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/brandInputTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/CaloriesTextField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/brandTextField"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/FatTextField"
+        android:hint="@string/calories_label">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/CaloriesInputTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/FatTextField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/brandTextField"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/CaloriesTextField"
+        android:hint="@string/fat_label">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/FatInputTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ProteinTextField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/protein_label"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/FatTextField"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/CarbsTextField">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ProteinInputTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/CarbsTextField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:hint="@string/carbs_label"
+        app:layout_constraintTop_toBottomOf="@id/FatTextField"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ProteinTextField">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/CarbsInputTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

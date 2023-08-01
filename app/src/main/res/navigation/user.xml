@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/user"
+    app:startDestination="@+id/userFragment">
+
+        <fragment
+            android:id="@+id/userFragment"
+            android:name="com.example.macrostracker.ui.user.UserFragment"
+            android:label="@string/userPageTitle"
+            tools:layout="@layout/fragment_user">
+                <action
+                    android:id="@+id/action_userFragment_to_setHeightDialogFragment"
+                    app:destination="@id/setHeightDialogFragment" />
+                <action
+                    android:id="@+id/action_userFragment_to_setAgeDialogFragment"
+                    app:destination="@id/setAgeDialogFragment" />
+                <action
+                    android:id="@+id/action_userFragment_to_setWeightDialogFragment"
+                    app:destination="@id/setWeightDialogFragment" />
+                <action
+                    android:id="@+id/action_userFragment_to_setGenderDialogFragment"
+                    app:destination="@id/setGenderDialogFragment" />
+                <action
+                    android:id="@+id/action_userFragment_to_setActivityLevelDialogFragment"
+                    app:destination="@id/setActivityLevelDialogFragment" />
+                <action
+                    android:id="@+id/action_userFragment_to_setObjectiveDialogFragment"
+                    app:destination="@id/setObjectiveDialogFragment" />
+                <action
+                    android:id="@+id/action_userFragment_to_setUnitsDialogFragment"
+                    app:destination="@id/setUnitsDialogFragment" />
+                <action
+                    android:id="@+id/action_userFragment_to_userFoodListFragment"
+                    app:destination="@id/userFoodListFragment" />
+        </fragment>
+        <dialog
+            android:id="@+id/setHeightDialogFragment"
+            android:name="com.example.macrostracker.ui.user.inputDialogFragments.SetHeightDialogFragment"
+            android:label="SetHeightDialogFragment" />
+        <dialog
+            android:id="@+id/setAgeDialogFragment"
+            android:name="com.example.macrostracker.ui.user.inputDialogFragments.SetAgeDialogFragment"
+            android:label="SetAgeDialogFragment" />
+        <dialog
+            android:id="@+id/setWeightDialogFragment"
+            android:name="com.example.macrostracker.ui.user.inputDialogFragments.SetWeightDialogFragment"
+            android:label="SetWeightDialogFragment" />
+        <dialog
+            android:id="@+id/setGenderDialogFragment"
+            android:name="com.example.macrostracker.ui.user.inputDialogFragments.SetGenderDialogFragment"
+            android:label="SetGenderDialogFragment" />
+        <dialog
+            android:id="@+id/setActivityLevelDialogFragment"
+            android:name="com.example.macrostracker.ui.user.inputDialogFragments.SetActivityLevelDialogFragment"
+            android:label="SetActivityLevelDialogFragment" />
+        <dialog
+            android:id="@+id/setObjectiveDialogFragment"
+            android:name="com.example.macrostracker.ui.user.inputDialogFragments.SetObjectiveDialogFragment"
+            android:label="SetObjectiveDialogFragment" />
+        <dialog
+            android:id="@+id/setUnitsDialogFragment"
+            android:name="com.example.macrostracker.ui.user.inputDialogFragments.SetUnitsDialogFragment"
+            android:label="SetUnitsDialogFragment" />
+        <fragment
+            android:id="@+id/userFoodListFragment"
+            android:name="com.example.macrostracker.ui.user.userFoodList.UserFoodListFragment"
+            android:label="@string/userFoodList"
+            tools:layout="@layout/fragment_user_food_list" >
+                <action
+                    android:id="@+id/action_userFoodListFragment_to_editFoodFragment"
+                    app:destination="@id/editFoodFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/editFoodFragment"
+            android:name="com.example.macrostracker.ui.user.userFoodList.editFood.EditFoodFragment"
+            android:label="{foodName}">
+                <argument
+                    android:name="foodId"
+                    app:argType="long" />
+                <argument
+                    android:name="foodName"
+                    app:argType="string" />
+        </fragment>
+</navigation>

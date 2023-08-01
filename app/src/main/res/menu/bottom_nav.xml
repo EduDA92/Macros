@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/user"
+        android:icon="@drawable/round_person_24"
+        android:contentDescription="@string/cd_user"
+        android:title="@string/title_user" />
+
+    <item
+        android:id="@+id/diary"
+        android:icon="@drawable/round_menu_book_24"
+        android:contentDescription="@string/cd_diary"
+        android:title="@string/title_diary" />
+
+</menu>
