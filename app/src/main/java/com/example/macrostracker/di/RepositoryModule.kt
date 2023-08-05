@@ -4,9 +4,11 @@ import com.example.macrostracker.data.repository.DefaultEntryRepository
 import com.example.macrostracker.data.repository.DefaultFoodRepository
 import com.example.macrostracker.data.repository.DefaultUserDataRepository
 import com.example.macrostracker.data.repository.DefaultMealsRepository
+import com.example.macrostracker.data.repository.DefaultRecipeRepository
 import com.example.macrostracker.data.repository.EntryRepository
 import com.example.macrostracker.data.repository.FoodRepository
 import com.example.macrostracker.data.repository.MealsRepository
+import com.example.macrostracker.data.repository.RecipeRepository
 import com.example.macrostracker.data.repository.UserDataRepository
 import dagger.Binds
 import dagger.Module
@@ -38,5 +40,8 @@ interface RepositoryModule {
         foodRepository: DefaultFoodRepository
     ): FoodRepository
 
-
+    @Binds
+    fun bindsRecipeRepository(
+        recipeRepository: DefaultRecipeRepository
+    ): RecipeRepository
 }

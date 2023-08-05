@@ -19,7 +19,7 @@ class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle): 
     override fun createFragment(position: Int): Fragment {
         return when(position){
             0 -> MyFoodsFragment.newInstance(mealId, date)
-            1 -> MyRecipesFragment()
+            1 -> MyRecipesFragment.newInstance(mealId, date)
             else -> throw UnsupportedOperationException("Unknown position")
         }
     }

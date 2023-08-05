@@ -1,12 +1,10 @@
 package com.example.macrostracker.ui.diary.foodList
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.camera.view.LifecycleCameraController
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -15,8 +13,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.macrostracker.R
 import com.example.macrostracker.databinding.FragmentMyFoodsBinding
+import com.example.macrostracker.ui.diary.foodList.deleteDialogFragments.DeleteFoodDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -43,10 +41,15 @@ class MyFoodsFragment : Fragment() {
         val navController = findNavController()
 
         /* Setup RecyclerView */
-        val adapter = MyFoodsAdapter { foodId, foodName ->
+        val adapter = MyFoodsAdapter({ foodId ->
+            DeleteFoodDialog.newInstance(foodId).show(childFragmentManager, DeleteFoodDialog.TAG)
+        }) { foodId, foodName ->
             val action =
                 FoodListFragmentDirections.actionFoodListFragmentToEntryFragment(
-                    requireArguments().getLong(MEAL_ID), foodId, arguments?.getString(DATE) ?: "", foodName
+                    requireArguments().getLong(MEAL_ID),
+                    foodId,
+                    arguments?.getString(DATE) ?: "",
+                    foodName
                 )
             navController.navigate(action)
         }

@@ -53,7 +53,7 @@
     <string name="calories">Calories</string>
     <string name="fat">Fat</string>
     <string name="create_a_food">Create a Food</string>
-    <string name="scan_a_food">Scan a Food</string>
+    <string name="scan_a_food">Scan a Barcode</string>
     <string name="food_name_label">food name</string>
     <string name="food_serving_label">serving size</string>
     <string name="calories_label">calories</string>
@@ -107,8 +107,9 @@
     <string name="flash_barcode_scanner">Activate - deactivate flash</string>
     <string name="scanned_food">Scanned Food</string>
     <string name="formatted_macros_number">%1dg</string>
-    <string name="formatted_entry_macros">%1$d calories, %2$dg Protein, %3$dg Fat, %4$dg Carbohydrate</string>
-    <string name="formatted_total_macros_summary">%1$dg / %2$dg</string>
+    <string name="formatted_macros_number_double">%1sg</string>
+    <string name="formatted_entry_macros">%1$d calories, %2$sg Protein, %3$sg Fat, %4$sg Carbohydrate</string>
+    <string name="formatted_total_macros_summary">%1$sg / %2$sg</string>
     <string name="formatted_total_macros_summary_calories">%1$d / %2$d</string>
     <string name="total_macros_summary_title">Total Macros</string>
     <string name="editMeals">Edit meals</string>
@@ -119,5 +120,18 @@
     <string name="userRecipeList">Recipe list</string>
     <string name="deleteFood">delete food</string>
     <string name="content_description_deleteFood">delete food</string>
-
+    <string name="create_a_recipe">Create a Recipe</string>
+    <string name="recipe_name_label">Recipe name</string>
+    <string name="recipe_description_label">Recipe description</string>
+    <string name="ingredients_title">Ingredients</string>
+    <string name="add_ingredient">add ingredient</string>
+    <string name="serving_size_string_resource">Serving size: %1$dg</string>
+    <string name="ingredient_quantity">Ingredient Quantity</string>
+    <string name="finishIngredients">finish adding ingredients</string>
+    <string name="deleteDialogTitle">Delete Ingredient</string>
+    <string name="deleteDialogText">Delete the current ingredient?</string>
+    <string name="deleteFoodDialogTitle">Delete Food</string>
+    <string name="deleteFoodDialogText">Delete the current food?</string>
+    <string name="deleteRecipeDialogTitle">Delete Recipe</string>
+    <string name="deleteRecipeDialogText">Delete the current recipe?</string>
 </resources>

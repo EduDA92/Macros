@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.diary.foodList.createRecipe.addRecipeIngredients.CreateRecipeIngredientsFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/topAppBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/add_food_top_app_bar"
+            app:navigationIcon="@drawable/round_arrow_back_24"
+            app:titleCentered="true" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topAppBarLayout"
+        tools:text="Macros"/>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/servingSizeSummary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider3"
+        tools:text="Serving size = 180g"/>
+
+    <!--Calories-->
+    <TextView
+        android:id="@+id/caloriesSummary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/servingSizeSummary"
+        app:layout_constraintBottom_toTopOf="@id/caloriesSummaryTittle"
+        app:layout_constraintEnd_toEndOf="@+id/caloriesSummaryTittle"
+        app:layout_constraintStart_toStartOf="@+id/caloriesSummaryTittle"
+        tools:text="123" />
+
+    <TextView
+        android:id="@+id/caloriesSummaryTittle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/calories"
+        app:layout_constraintTop_toBottomOf="@id/caloriesSummary"
+        app:layout_constraintEnd_toStartOf="@id/proteinSummaryTitle"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!--Protein-->
+    <TextView
+        android:id="@+id/proteinSummary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/servingSizeSummary"
+        app:layout_constraintEnd_toEndOf="@+id/proteinSummaryTitle"
+        app:layout_constraintStart_toStartOf="@+id/proteinSummaryTitle"
+        tools:text="123" />
+
+    <TextView
+        android:id="@+id/proteinSummaryTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/protein"
+        app:layout_constraintTop_toBottomOf="@id/proteinSummary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/caloriesSummaryTittle" />
+
+    <!--Fat-->
+    <TextView
+        android:id="@+id/fatSummary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintTop_toBottomOf="@id/caloriesSummaryTittle"
+        app:layout_constraintEnd_toEndOf="@+id/fatSummaryTitle"
+        app:layout_constraintStart_toStartOf="@+id/fatSummaryTitle"
+        tools:text="123" />
+
+    <TextView
+        android:id="@+id/fatSummaryTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/fat"
+        app:layout_constraintTop_toBottomOf="@id/fatSummary"
+        app:layout_constraintEnd_toStartOf="@id/carbohydrateSummaryTitle"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!--Carbohydrate-->
+    <TextView
+        android:id="@+id/carbohydrateSummary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintTop_toBottomOf="@id/proteinSummaryTitle"
+        app:layout_constraintEnd_toEndOf="@+id/carbohydrateSummaryTitle"
+        app:layout_constraintStart_toStartOf="@+id/carbohydrateSummaryTitle"
+        tools:text="123" />
+
+    <TextView
+        android:id="@+id/carbohydrateSummaryTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/carbohydrate"
+        app:layout_constraintTop_toBottomOf="@id/carbohydrateSummary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fatSummaryTitle" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/fatSummaryTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/ingredientsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center|center_vertical"
+        android:padding="8dp"
+        android:text="@string/ingredients_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider1" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ingredientsTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addIngredientButton"
+        style="?attr/materialIconButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/add_ingredient"
+        android:text="@string/add_ingredient"
+        app:icon="@drawable/round_add_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recipeIngredientList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addIngredientButton" />
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

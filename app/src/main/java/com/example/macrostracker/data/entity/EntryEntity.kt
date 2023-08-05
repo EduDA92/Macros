@@ -9,7 +9,8 @@ import com.example.macrostracker.model.Entry
 import java.time.LocalDate
 
 /* Entry has 1:N relation with meals, 1 meal can have N entries, 1 entry belongs to only 1 meal
-*  Entry has N:1 relation with food,  1 entry only contains 1 food, 1 food can belong to N different entries*/
+*  Entry has N:1 relation with food,  1 entry only contains 1 food, 1 food can belong to N different entries
+* Entry has N:1 relation with recipes, 1 entry only contains 1 recipe, 1 recipe can belong to N different entries*/
 
 @Entity(
     tableName = "entries",
@@ -25,11 +26,18 @@ import java.time.LocalDate
             parentColumns = ["id"],
             childColumns = ["foodId"],
             onDelete = ForeignKey.CASCADE
+        ),
+        ForeignKey(
+            entity = RecipeEntity::class,
+            parentColumns = ["id"],
+            childColumns = ["recipeId"],
+            onDelete = ForeignKey.CASCADE
         )
     ],
     indices = [
         Index(value = ["mealId"]),
-        Index(value = ["foodId"])
+        Index(value = ["foodId"]),
+        Index(value = ["recipeId"])
     ]
 )
 data class EntryEntity(
@@ -40,6 +48,8 @@ data class EntryEntity(
     val mealId: Long,
     @ColumnInfo(name = "foodId")
     val foodId: Long?,
+    @ColumnInfo(name = "recipeId")
+    val recipeId: Long?,
     @ColumnInfo(name = "servingSize")
     val servingSize: Int
 )
@@ -49,5 +59,6 @@ fun EntryEntity.asExternalModel() = Entry(
     date = date,
     mealId = mealId,
     foodId = foodId,
+    recipeId = recipeId,
     servingSize = servingSize
 )

@@ -21,6 +21,7 @@ import com.example.macrostracker.model.Entry
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.text.DecimalFormat
 import java.time.LocalDate
 
 private const val CALORIES = "Calories"
@@ -37,6 +38,8 @@ class CreateEntryFragment : Fragment() {
     private val navigationArgs: CreateEntryFragmentArgs by navArgs()
 
     private val viewModel: CreateEntryViewModel by viewModels()
+
+    private val decimalFormat = DecimalFormat("#.##")
 
 
     override fun onCreateView(
@@ -84,6 +87,7 @@ class CreateEntryFragment : Fragment() {
                                 date = LocalDate.parse(navigationArgs.date),
                                 mealId = navigationArgs.mealId,
                                 foodId = navigationArgs.foodId,
+                                recipeId = null,
                                 servingSize = binding.ServingSizeTextField.editText!!.text.toString()
                                     .toInt()
                             )
@@ -111,15 +115,29 @@ class CreateEntryFragment : Fragment() {
                                     binding.caloriesSummary.text =
                                         entryServing.toString().toInt().times(food.calories)
                                             .div(food.servingSize).toString()
-                                    binding.fatSummary.text =
-                                        entryServing.toString().toInt().times(food.fat)
-                                            .div(food.servingSize).toString()
+                                    binding.fatSummary.text = resources.getString(
+                                        R.string.formatted_macros_number_double,
+                                        decimalFormat.format(
+                                            entryServing.toString().toInt().times(food.fat)
+                                                .div(food.servingSize)
+                                        )
+                                    )
                                     binding.carbohydrateSummary.text =
-                                        entryServing.toString().toInt().times(food.carbs)
-                                            .div(food.servingSize).toString()
+                                        resources.getString(
+                                            R.string.formatted_macros_number_double,
+                                            decimalFormat.format(
+                                                entryServing.toString().toInt().times(food.carbs)
+                                                    .div(food.servingSize)
+                                            )
+                                        )
                                     binding.proteinSummary.text =
-                                        entryServing.toString().toInt().times(food.protein)
-                                            .div(food.servingSize).toString()
+                                        resources.getString(
+                                            R.string.formatted_macros_number_double,
+                                            decimalFormat.format(
+                                                entryServing.toString().toInt().times(food.protein)
+                                                    .div(food.servingSize)
+                                            )
+                                        )
                                 } else {
                                     binding.caloriesSummary.text = "0"
                                     binding.fatSummary.text = "0"

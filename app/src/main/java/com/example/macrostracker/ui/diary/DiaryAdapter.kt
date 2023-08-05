@@ -10,14 +10,18 @@ import com.example.macrostracker.model.EntryWithFood
 import com.example.macrostracker.model.Meal
 import com.example.macrostracker.databinding.DiaryAddFoodItemBinding
 import com.example.macrostracker.databinding.DiaryEntryItemBinding
+import com.example.macrostracker.databinding.DiaryEntryRecipeItemBinding
 import com.example.macrostracker.databinding.DiaryEntrySummaryItemBinding
 import com.example.macrostracker.databinding.DiaryEntryTitleItemBinding
 import com.example.macrostracker.databinding.DiaryEntryTotalSummaryItemBinding
+import com.example.macrostracker.model.EntryWithRecipe
+import java.text.DecimalFormat
 
 class DiaryAdapter(
     private val deleteEntry: (Long) -> Unit,
     private val navigate: (Long, String) -> Unit,
-    private val editEntry: (String, Long, Long) -> Unit
+    private val editEntry: (String, Long, Long) -> Unit,
+    private val editRecipeEntry: (String, Long, Long) -> Unit
 ) : ListAdapter<UiModel, ViewHolder>(DiffCallBack) {
 
     class DiaryEntryTitleViewHolder(
@@ -52,6 +56,7 @@ class DiaryAdapter(
     ) : ViewHolder(binding.root) {
 
         private var currentEntry: EntryWithFood? = null
+        private val decimalFormat = DecimalFormat("#.##")
 
         init {
             itemView.setOnLongClickListener {
@@ -81,9 +86,9 @@ class DiaryAdapter(
             binding.entryMacros.text = resources.getString(
                 R.string.formatted_entry_macros,
                 entry.entryCalories,
-                entry.entryProtein,
-                entry.entryFat,
-                entry.entryCarbs
+                decimalFormat.format(entry.entryProtein),
+                decimalFormat.format(entry.entryFat),
+                decimalFormat.format(entry.entryCarbs)
             )
 
         }
@@ -106,8 +111,64 @@ class DiaryAdapter(
 
     }
 
+    class DiaryRecipeEntryItemViewHolder(
+        private var binding: DiaryEntryRecipeItemBinding,
+        private val deleteEntry: (Long) -> Unit,
+        private val editRecipeEntry: (String, Long, Long) -> Unit
+    ) : ViewHolder(binding.root) {
+
+        private var currentEntry: EntryWithRecipe? = null
+        private val decimalFormat = DecimalFormat("#.##")
+
+        init {
+            itemView.setOnClickListener {
+                currentEntry?.let {
+                    editRecipeEntry(it.recipe.name, it.recipe.id, it.id)
+                }
+            }
+            itemView.setOnLongClickListener {
+                currentEntry?.let {
+                    deleteEntry(it.id)
+                }
+                true
+            }
+        }
+
+        fun bind(entry: EntryWithRecipe) {
+            val resources = itemView.resources
+            currentEntry = entry
+            binding.recipeName.text = entry.recipe.name
+            binding.entryServing.text =
+                resources.getString(R.string.formatted_macros_number, entry.servingSize)
+            binding.entryMacros.text = resources.getString(
+                R.string.formatted_entry_macros,
+                entry.entryCalories,
+                decimalFormat.format(entry.entryProtein),
+                decimalFormat.format(entry.entryFat),
+                decimalFormat.format(entry.entryCarbs)
+            )
+        }
+
+        companion object {
+            fun create(
+                parent: ViewGroup,
+                deleteEntry: (Long) -> Unit,
+                editRecipeEntry: (String, Long, Long) -> Unit
+            ): DiaryRecipeEntryItemViewHolder {
+                return DiaryRecipeEntryItemViewHolder(
+                    DiaryEntryRecipeItemBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    ), deleteEntry, editRecipeEntry
+                )
+            }
+        }
+
+    }
+
     class DiaryAddFoodViewHolder(
-        private var binding: DiaryAddFoodItemBinding,
+        var binding: DiaryAddFoodItemBinding,
         private val navigate: (Long, String) -> Unit
     ) : ViewHolder(binding.root) {
 
@@ -149,17 +210,27 @@ class DiaryAdapter(
         private var binding: DiaryEntrySummaryItemBinding
     ) : ViewHolder(binding.root) {
 
+        private val decimalFormat = DecimalFormat("#.##")
 
         fun bind(macros: MacrosSummary) {
             val resources = itemView.resources
 
             binding.caloriesSummary.text = macros.calories.toString()
             binding.fatSummary.text =
-                resources.getString(R.string.formatted_macros_number, macros.fat)
+                resources.getString(
+                    R.string.formatted_macros_number_double,
+                    decimalFormat.format(macros.fat)
+                )
             binding.carbohydrateSummary.text =
-                resources.getString(R.string.formatted_macros_number, macros.carbohydrate)
+                resources.getString(
+                    R.string.formatted_macros_number_double,
+                    decimalFormat.format(macros.carbohydrate)
+                )
             binding.proteinSummary.text =
-                resources.getString(R.string.formatted_macros_number, macros.protein)
+                resources.getString(
+                    R.string.formatted_macros_number_double,
+                    decimalFormat.format(macros.protein)
+                )
         }
 
         companion object {
@@ -180,6 +251,7 @@ class DiaryAdapter(
         private var binding: DiaryEntryTotalSummaryItemBinding
     ) : ViewHolder(binding.root) {
 
+        private val decimalFormat = DecimalFormat("#.##")
 
         fun bind(totalMacros: MacrosSummary, referenceMacros: MacrosSummary) {
             val resources = itemView.resources
@@ -192,18 +264,18 @@ class DiaryAdapter(
             )
             binding.fatSummary.text = resources.getString(
                 R.string.formatted_total_macros_summary,
-                totalMacros.fat,
-                referenceMacros.fat
+                decimalFormat.format(totalMacros.fat),
+                decimalFormat.format(referenceMacros.fat)
             )
             binding.carbohydrateSummary.text = resources.getString(
                 R.string.formatted_total_macros_summary,
-                totalMacros.carbohydrate,
-                referenceMacros.carbohydrate
+                decimalFormat.format(totalMacros.carbohydrate),
+                decimalFormat.format(referenceMacros.carbohydrate)
             )
             binding.proteinSummary.text = resources.getString(
                 R.string.formatted_total_macros_summary,
-                totalMacros.protein,
-                referenceMacros.protein
+                decimalFormat.format(totalMacros.protein),
+                decimalFormat.format(referenceMacros.protein)
             )
         }
 
@@ -243,6 +315,11 @@ class DiaryAdapter(
                 DiaryEntryTotalSummaryViewHolder.create(parent)
             }
 
+            R.layout.diary_entry_recipe_item -> {
+                DiaryRecipeEntryItemViewHolder.create(parent, deleteEntry, editRecipeEntry)
+            }
+
+
             else -> {
                 throw UnsupportedOperationException("Unknown view")
             }
@@ -259,6 +336,8 @@ class DiaryAdapter(
                 uiModel.totalMacros,
                 uiModel.referenceMacros
             )
+
+            is UiModel.EntryRecipeItem -> (holder as DiaryRecipeEntryItemViewHolder).bind(uiModel.entry)
         }
     }
 
@@ -269,6 +348,7 @@ class DiaryAdapter(
             is UiModel.EntrySummaryItem -> R.layout.diary_entry_summary_item
             is UiModel.TitleItem -> R.layout.diary_entry_title_item
             is UiModel.TotalSummaryItem -> R.layout.diary_entry_total_summary_item
+            is UiModel.EntryRecipeItem -> R.layout.diary_entry_recipe_item
         }
     }
 
@@ -280,7 +360,8 @@ class DiaryAdapter(
                         (oldItem is UiModel.TitleItem && newItem is UiModel.TitleItem && oldItem.meal.id == newItem.meal.id) ||
                         (oldItem is UiModel.EntrySummaryItem && newItem is UiModel.EntrySummaryItem && oldItem == newItem) ||
                         (oldItem is UiModel.AddFoodItem && newItem is UiModel.AddFoodItem && oldItem.meal.id == newItem.meal.id) ||
-                        (oldItem is UiModel.TotalSummaryItem && newItem is UiModel.TotalSummaryItem && oldItem == newItem)
+                        (oldItem is UiModel.TotalSummaryItem && newItem is UiModel.TotalSummaryItem && oldItem == newItem) ||
+                        (oldItem is UiModel.EntryRecipeItem && newItem is UiModel.EntryRecipeItem && oldItem.entry.id == newItem.entry.id)
             }
 
             override fun areContentsTheSame(oldItem: UiModel, newItem: UiModel): Boolean {

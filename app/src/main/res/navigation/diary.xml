@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_diaryFragment_to_editEntryFragment"
             app:destination="@id/editEntryFragment" />
+        <action
+            android:id="@+id/action_diaryFragment_to_editRecipeEntryFragment"
+            app:destination="@id/editRecipeEntryFragment" />
     </fragment>
     <fragment
         android:id="@+id/foodListFragment"
@@ -43,6 +46,12 @@
         <action
             android:id="@+id/action_foodListFragment_to_barcodeScannerFragment"
             app:destination="@id/barcodeScannerFragment" />
+        <action
+            android:id="@+id/action_foodListFragment_to_createRecipe"
+            app:destination="@id/createRecipe" />
+        <action
+            android:id="@+id/action_foodListFragment_to_createRecipeEntryFragment"
+            app:destination="@id/createRecipeEntryFragment" />
     </fragment>
     <fragment
         android:id="@+id/createFoodFragment"
@@ -114,6 +123,90 @@
             app:argType="string" />
         <argument
             android:name="foodId"
+            app:argType="long" />
+        <argument
+            android:name="entryId"
+            app:argType="long" />
+    </fragment>
+    <navigation android:id="@+id/createRecipe"
+        app:startDestination="@id/createRecipeFragment">
+        <fragment
+            android:id="@+id/createRecipeFragment"
+            android:name="com.example.macrostracker.ui.diary.foodList.createRecipe.CreateRecipeFragment"
+            android:label="fragment_create_recipe"
+            tools:layout="@layout/fragment_create_recipe" >
+            <action
+                android:id="@+id/action_createRecipeFragment_to_createRecipeIngredientsFragment"
+                app:destination="@id/createRecipeIngredientsFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/createRecipeIngredientsFragment"
+            android:name="com.example.macrostracker.ui.diary.foodList.createRecipe.addRecipeIngredients.CreateRecipeIngredientsFragment"
+            android:label="{recipeName}"
+            tools:layout="@layout/fragment_create_recipe_ingredients">
+            <argument
+                android:name="recipeName"
+                app:argType="string" />
+            <argument
+                android:name="recipeId"
+                app:argType="long" />
+            <action
+                android:id="@+id/action_createRecipeIngredientsFragment_to_ingredientListFragment"
+                app:destination="@id/ingredientListFragment" />
+            <action
+                android:id="@+id/action_createRecipeIngredientsFragment_to_deleteIngredientDialogFragment"
+                app:destination="@id/deleteIngredientDialogFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/ingredientListFragment"
+            android:name="com.example.macrostracker.ui.diary.foodList.createRecipe.ingredientList.IngredientListFragment"
+            android:label="{recipeName}"
+            tools:layout="@layout/fragment_ingredient_list">
+            <argument
+                android:name="recipeName"
+                app:argType="string" />
+            <argument
+                android:name="recipeId"
+                app:argType="long" />
+        </fragment>
+        <dialog
+            android:id="@+id/deleteIngredientDialogFragment"
+            android:name="com.example.macrostracker.ui.diary.foodList.createRecipe.addRecipeIngredients.DeleteIngredientDialogFragment"
+            android:label="DeleteIngredientDialogFragment" >
+            <argument
+                android:name="recipeId"
+                app:argType="long" />
+            <argument
+                android:name="foodId"
+                app:argType="long" />
+        </dialog>
+    </navigation>
+    <fragment
+        android:id="@+id/createRecipeEntryFragment"
+        android:name="com.example.macrostracker.ui.diary.foodList.createRecipeEntry.CreateRecipeEntryFragment"
+        android:label="{recipeName}">
+        <argument
+            android:name="recipeName"
+            app:argType="string" />
+        <argument
+            android:name="recipeId"
+            app:argType="long" />
+        <argument
+            android:name="mealId"
+            app:argType="long" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/editRecipeEntryFragment"
+        android:name="com.example.macrostracker.ui.diary.editRecipeEntry.EditRecipeEntryFragment"
+        android:label="{recipeName}">
+        <argument
+            android:name="recipeName"
+            app:argType="string" />
+        <argument
+            android:name="recipeId"
             app:argType="long" />
         <argument
             android:name="entryId"

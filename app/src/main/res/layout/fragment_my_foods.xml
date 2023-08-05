@@ -30,11 +30,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/foodListRV"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/createFoodButton"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/food_list_item"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

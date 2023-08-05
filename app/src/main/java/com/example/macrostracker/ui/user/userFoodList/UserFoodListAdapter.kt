@@ -1,8 +1,6 @@
 package com.example.macrostracker.ui.user.userFoodList
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.ViewGroup
 import androidx.recyclerview.selection.ItemDetailsLookup
 import androidx.recyclerview.selection.SelectionTracker
@@ -12,17 +10,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.macrostracker.R
 import com.example.macrostracker.databinding.FoodListItemBinding
 import com.example.macrostracker.model.Food
+import java.text.DecimalFormat
 
 class UserFoodListAdapter(private val navigate: (String, Long) -> Unit) :
     ListAdapter<Food, UserFoodListAdapter.UserFoodViewHolder>(DiffCallBack) {
 
     var selectionTracker: SelectionTracker<Long>? = null
 
+
     class UserFoodViewHolder(
         private var binding: FoodListItemBinding,
         private val navigate: (String, Long) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        private val decimalFormat = DecimalFormat("#.##")
         private var currentFood: Food? = null
 
         init {
@@ -52,9 +53,9 @@ class UserFoodListAdapter(private val navigate: (String, Long) -> Unit) :
                 resources.getString(
                     R.string.formatted_entry_macros,
                     food.calories,
-                    food.protein,
-                    food.fat,
-                    food.carbs
+                    decimalFormat.format(food.protein),
+                    decimalFormat.format(food.fat),
+                    decimalFormat.format(food.carbs)
                 )
         }
 

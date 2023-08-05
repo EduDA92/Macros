@@ -1,6 +1,6 @@
 package com.example.macrostracker.ui.diary.foodList
 
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,23 +9,34 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.macrostracker.R
 import com.example.macrostracker.databinding.FoodListItemBinding
 import com.example.macrostracker.model.Food
+import java.text.DecimalFormat
 
 class MyFoodsAdapter(
+    private val showDialog: (Long) -> Unit,
     private val navigate: (Long, String) -> Unit
 ) : ListAdapter<Food, MyFoodsAdapter.FoodViewHolder>(DiffCallBack) {
 
     class FoodViewHolder(
         private var binding: FoodListItemBinding,
-        private val navigate: (Long, String) -> Unit
+        private val navigate: (Long, String) -> Unit,
+        private val showDialog: (Long) -> Unit
     ) : ViewHolder(binding.root) {
 
         private var currentFood: Food? = null
+        private val decimalFormat = DecimalFormat("#.##")
 
         init {
             itemView.setOnClickListener {
                 currentFood?.let { food ->
                     navigate(food.id, food.name)
                 }
+            }
+
+            itemView.setOnLongClickListener{
+                currentFood?.let{
+                    showDialog(it.id)
+                }
+                true
             }
         }
 
@@ -39,23 +50,24 @@ class MyFoodsAdapter(
                 resources.getString(
                     R.string.formatted_entry_macros,
                     food.calories,
-                    food.protein,
-                    food.fat,
-                    food.carbs
+                    decimalFormat.format(food.protein),
+                    decimalFormat.format(food.fat),
+                    decimalFormat.format(food.carbs)
                 )
         }
 
         companion object {
             fun create(
                 parent: ViewGroup,
-                navigate: (Long, String) -> Unit
+                navigate: (Long, String) -> Unit,
+                showDialog: (Long) -> Unit
             ): FoodViewHolder {
                 return FoodViewHolder(
                     FoodListItemBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
                         false
-                    ), navigate
+                    ), navigate, showDialog
                 )
             }
         }
@@ -77,7 +89,7 @@ class MyFoodsAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
-        return FoodViewHolder.create(parent, navigate)
+        return FoodViewHolder.create(parent, navigate, showDialog)
     }
 
     override fun onBindViewHolder(holder: FoodViewHolder, position: Int) {

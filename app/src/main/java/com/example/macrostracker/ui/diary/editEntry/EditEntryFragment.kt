@@ -20,6 +20,7 @@ import com.example.macrostracker.databinding.FragmentEntryBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.text.DecimalFormat
 
 
 private const val CALORIES = "Calories"
@@ -37,6 +38,8 @@ class EditEntryFragment : Fragment() {
     private val viewModel: EditEntryViewModel by viewModels()
 
     private val navigationArgs: EditEntryFragmentArgs by navArgs()
+
+    private val decimalFormat = DecimalFormat("#.##")
 
 
     override fun onCreateView(
@@ -85,24 +88,30 @@ class EditEntryFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 /* This scope collects the entry data to show the actual data of the entry */
                 launch {
-                    viewModel.entryWithFood.collect{observableEntryWithFood ->
-                        observableEntryWithFood?.let{entryWithFood ->
+                    viewModel.entryWithFood.collect { observableEntryWithFood ->
+                        observableEntryWithFood?.let { entryWithFood ->
                             /* initialize summary binding */
                             if (savedInstanceState != null) {
                                 binding.caloriesSummary.text = savedInstanceState.getString(CALORIES)
                                 binding.proteinSummary.text = savedInstanceState.getString(PROTEIN)
                                 binding.fatSummary.text = savedInstanceState.getString(FAT)
-                                binding.carbohydrateSummary.text = savedInstanceState.getString(
-                                    CARBS
-                                )
-                                binding.ServingSizeTextField.editText?.setText(savedInstanceState.getString(
-                                    SERVINGSIZE
-                                ))
+                                binding.carbohydrateSummary.text = savedInstanceState.getString(CARBS)
+                                binding.ServingSizeTextField.editText?.setText(savedInstanceState.getString(SERVINGSIZE))
                             } else {
-                                binding.caloriesSummary.text = entryWithFood.entryCalories.toString()
-                                binding.proteinSummary.text = entryWithFood.entryProtein.toString()
-                                binding.fatSummary.text = entryWithFood.entryFat.toString()
-                                binding.carbohydrateSummary.text = entryWithFood.entryCarbs.toString()
+                                binding.caloriesSummary.text =
+                                    entryWithFood.entryCalories.toString()
+                                binding.proteinSummary.text = resources.getString(
+                                    R.string.formatted_macros_number_double,
+                                    decimalFormat.format(entryWithFood.entryProtein)
+                                )
+                                binding.fatSummary.text = resources.getString(
+                                    R.string.formatted_macros_number_double,
+                                    decimalFormat.format(entryWithFood.entryFat)
+                                )
+                                binding.carbohydrateSummary.text = resources.getString(
+                                    R.string.formatted_macros_number_double,
+                                    decimalFormat.format(entryWithFood.entryCarbs)
+                                )
                                 binding.ServingSizeTextField.editText?.setText(entryWithFood.servingSize.toString())
                             }
                         }
@@ -112,26 +121,51 @@ class EditEntryFragment : Fragment() {
                 /* This scope modify the textViews showing the Macros data when the user changes the servingSize */
                 launch {
                     viewModel.food.collect { observableFood ->
-                        observableFood?.let{food ->
+                        observableFood?.let { food ->
                             binding.ServingSizeTextField.editText?.addTextChangedListener(object :
                                 TextWatcher {
-                                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                                override fun beforeTextChanged(
+                                    p0: CharSequence?,
+                                    p1: Int,
+                                    p2: Int,
+                                    p3: Int
+                                ) {
+                                }
 
-                                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                                override fun onTextChanged(
+                                    p0: CharSequence?,
+                                    p1: Int,
+                                    p2: Int,
+                                    p3: Int
+                                ) {
                                     p0?.let { entryServing ->
                                         if (entryServing.isNotEmpty()) {
                                             binding.caloriesSummary.text =
                                                 entryServing.toString().toInt().times(food.calories)
                                                     .div(food.servingSize).toString()
-                                            binding.fatSummary.text =
-                                                entryServing.toString().toInt().times(food.fat)
-                                                    .div(food.servingSize).toString()
+                                            binding.fatSummary.text = resources.getString(
+                                                R.string.formatted_macros_number_double,
+                                                decimalFormat.format(
+                                                    entryServing.toString().toInt().times(food.fat)
+                                                        .div(food.servingSize)
+                                                )
+                                            )
                                             binding.carbohydrateSummary.text =
-                                                entryServing.toString().toInt().times(food.carbs)
-                                                    .div(food.servingSize).toString()
+                                                resources.getString(
+                                                    R.string.formatted_macros_number_double,
+                                                    decimalFormat.format(
+                                                        entryServing.toString().toInt().times(food.carbs)
+                                                            .div(food.servingSize)
+                                                    )
+                                                )
                                             binding.proteinSummary.text =
-                                                entryServing.toString().toInt().times(food.protein)
-                                                    .div(food.servingSize).toString()
+                                                resources.getString(
+                                                    R.string.formatted_macros_number_double,
+                                                    decimalFormat.format(
+                                                        entryServing.toString().toInt().times(food.protein)
+                                                            .div(food.servingSize)
+                                                    )
+                                                )
                                         } else {
                                             binding.caloriesSummary.text = "0"
                                             binding.fatSummary.text = "0"
@@ -142,7 +176,8 @@ class EditEntryFragment : Fragment() {
 
                                 }
 
-                                override fun afterTextChanged(p0: Editable?) {} })
+                                override fun afterTextChanged(p0: Editable?) {}
+                            })
                         }
                     }
                 }

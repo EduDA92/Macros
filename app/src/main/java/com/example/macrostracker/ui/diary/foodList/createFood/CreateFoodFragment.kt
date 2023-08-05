@@ -59,10 +59,10 @@ class CreateFoodFragment : Fragment() {
                                 brand = binding.brandTextField.editText!!.text.toString(),
                                 calories = binding.CaloriesTextField.editText!!.text.toString()
                                     .toInt(),
-                                carbs = binding.CarbsTextField.editText!!.text.toString().toInt(),
-                                fat = binding.FatTextField.editText!!.text.toString().toInt(),
+                                carbs = binding.CarbsTextField.editText!!.text.toString().toDouble(),
+                                fat = binding.FatTextField.editText!!.text.toString().toDouble(),
                                 protein = binding.ProteinTextField.editText!!.text.toString()
-                                    .toInt(),
+                                    .toDouble(),
                                 servingSize = binding.ServingSizeTextField.editText!!.text.toString()
                                     .toInt()
 

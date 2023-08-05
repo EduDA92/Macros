@@ -20,12 +20,12 @@ fun EntryAndFood.asExternalModel() = EntryWithFood(
     mealId = entryEntity.mealId,
     servingSize = entryEntity.servingSize,
     food = foodEntity.asExternalModel(),
-    entryCalories = calculateNutrient(foodEntity.servingSize, entryEntity.servingSize, foodEntity.calories),
+    entryCalories = calculateNutrient(foodEntity.servingSize, entryEntity.servingSize, foodEntity.calories.toDouble()).toInt(),
     entryCarbs = calculateNutrient(foodEntity.servingSize, entryEntity.servingSize, foodEntity.carbs),
     entryFat = calculateNutrient(foodEntity.servingSize, entryEntity.servingSize, foodEntity.fat),
     entryProtein = calculateNutrient(foodEntity.servingSize, entryEntity.servingSize, foodEntity.protein),
 )
 
-private fun calculateNutrient(foodServing: Int, entryServing: Int, foodNutrient: Int): Int{
+private fun calculateNutrient(foodServing: Int, entryServing: Int, foodNutrient: Double): Double{
     return entryServing.times(foodNutrient).div(foodServing)
 }

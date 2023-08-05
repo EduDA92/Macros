@@ -9,7 +9,7 @@ data class EntryWithFood (
     val servingSize: Int,
     val food: Food,
     val entryCalories: Int,
-    val entryCarbs: Int,
-    val entryFat: Int,
-    val entryProtein: Int
+    val entryCarbs: Double,
+    val entryFat: Double,
+    val entryProtein: Double
 )

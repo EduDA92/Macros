@@ -4,6 +4,7 @@ import com.example.macrostracker.data.MacrosDatabase
 import com.example.macrostracker.data.dao.EntryDao
 import com.example.macrostracker.data.dao.FoodDao
 import com.example.macrostracker.data.dao.MealsDao
+import com.example.macrostracker.data.dao.RecipeDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,5 +28,10 @@ object DaosModule {
     fun providesEntryDao(
         database: MacrosDatabase
     ): EntryDao = database.EntryDao()
+
+    @Provides
+    fun providesRecipeDao(
+        database: MacrosDatabase
+    ): RecipeDao = database.RecipeDao()
 
 }

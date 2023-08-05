@@ -1,6 +1,8 @@
 package com.example.macrostracker.ui.user.userFoodList
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.ActionMode
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -115,7 +117,7 @@ class UserFoodListFragment : Fragment() {
 
         adapter.selectionTracker = tracker
 
-        /* Activate & deactivate action mode and button to add exercises here */
+        /* Activate & deactivate action mode */
         tracker.addObserver(object : SelectionTracker.SelectionObserver<Long>(){
             override fun onSelectionChanged() {
                 if(tracker.hasSelection()){
@@ -136,6 +138,20 @@ class UserFoodListFragment : Fragment() {
                 }
             }
         }
+
+        binding.searchFood.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                viewModel.updateSearchText(p0.toString())
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+        })
 
     }
 

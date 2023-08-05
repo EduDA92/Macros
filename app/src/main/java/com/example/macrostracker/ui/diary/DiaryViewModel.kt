@@ -12,6 +12,7 @@ import com.example.macrostracker.data.util.enums.GenderEnum
 import com.example.macrostracker.data.util.enums.HeightEnum
 import com.example.macrostracker.data.util.enums.ObjectiveEnum
 import com.example.macrostracker.data.util.enums.WeightEnum
+import com.example.macrostracker.model.EntryWithRecipe
 import com.example.macrostracker.model.UserData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -44,20 +45,21 @@ class DiaryViewModel @Inject constructor(
 
         val mealList = mealsRepository.getMeals()
         val entryList = entryRepository.getEntriesFromDate(it)
+        val recipeEntryList = entryRepository.getRecipeEntriesFromDate(it)
         val userData = userDataRepository.userData
 
-        combine(mealList, entryList, userData) { meals, entries, user ->
+        combine(mealList, entryList, recipeEntryList, userData) { meals, entries, recipeEntries, user ->
 
             val formattedDiaryEntries = mutableListOf<UiModel>()
             var entriesAdded: Boolean
             var entryCalories = 0
             var totalCalories = 0
-            var entryCarbohydrate = 0
-            var totalCarbohydrate = 0
-            var entryProtein = 0
-            var totalProtein = 0
-            var entryFat = 0
-            var totalFat = 0
+            var entryCarbohydrate = 0.0
+            var totalCarbohydrate = 0.0
+            var entryProtein = 0.0
+            var totalProtein = 0.0
+            var entryFat = 0.0
+            var totalFat = 0.0
 
             /* Reference macros calculation */
             val referenceCalories = calculateReferenceCalories(user)
@@ -77,6 +79,7 @@ class DiaryViewModel @Inject constructor(
 
                 formattedDiaryEntries.add(UiModel.TitleItem(currentMeal))
 
+                /* Food entries */
                 entries.forEach { currentEntry ->
 
                     if (currentEntry.mealId == currentMeal.id) {
@@ -89,6 +92,24 @@ class DiaryViewModel @Inject constructor(
                         totalProtein += currentEntry.entryProtein
                         entryFat += currentEntry.entryFat
                         totalFat += currentEntry.entryFat
+                    }
+                    entriesAdded = true
+                }
+
+                /* Recipe entries */
+
+                recipeEntries.forEach { currentRecipe ->
+
+                    if(currentRecipe.mealId == currentMeal.id){
+                        formattedDiaryEntries.add(UiModel.EntryRecipeItem(currentRecipe))
+                        entryCalories += currentRecipe.entryCalories
+                        totalCalories += currentRecipe.entryCalories
+                        entryCarbohydrate += currentRecipe.entryCarbs
+                        totalCarbohydrate += currentRecipe.entryCarbs
+                        entryProtein += currentRecipe.entryProtein
+                        totalProtein += currentRecipe.entryProtein
+                        entryFat += currentRecipe.entryFat
+                        totalFat += currentRecipe.entryFat
                     }
                     entriesAdded = true
                 }
@@ -110,9 +131,9 @@ class DiaryViewModel @Inject constructor(
                         )
                     )
                     entryCalories = 0
-                    entryCarbohydrate = 0
-                    entryProtein = 0
-                    entryFat = 0
+                    entryCarbohydrate = 0.0
+                    entryProtein = 0.0
+                    entryFat = 0.0
                 }
             }
 
@@ -254,36 +275,36 @@ class DiaryViewModel @Inject constructor(
     }
 
 
-    private fun calculateReferenceCarbs(referenceCalories: Int): Int{
+    private fun calculateReferenceCarbs(referenceCalories: Int): Double{
         val carbsWorthCalories = 4
         val carbsModifier = 0.4
-        return referenceCalories.times(carbsModifier).div(carbsWorthCalories).toInt()
+        return referenceCalories.times(carbsModifier).div(carbsWorthCalories)
     }
 
-    private fun calculateReferenceProtein(userData: UserData, referenceCalories: Int): Int{
+    private fun calculateReferenceProtein(userData: UserData, referenceCalories: Int): Double{
 
         val proteinWorthCalories = 4
         val weightLossModifier = 0.4
         val weightGainMaintainModifier = 0.3
 
         return when(userData.objective){
-            ObjectiveEnum.LOSE_WEIGHT -> referenceCalories.times(weightLossModifier).div(proteinWorthCalories).toInt()
-            ObjectiveEnum.MAINTAIN_WEIGHT -> referenceCalories.times(weightGainMaintainModifier).div(proteinWorthCalories).toInt()
-            ObjectiveEnum.GAIN_WEIGHT -> referenceCalories.times(weightGainMaintainModifier).div(proteinWorthCalories).toInt()
+            ObjectiveEnum.LOSE_WEIGHT -> referenceCalories.times(weightLossModifier).div(proteinWorthCalories)
+            ObjectiveEnum.MAINTAIN_WEIGHT -> referenceCalories.times(weightGainMaintainModifier).div(proteinWorthCalories)
+            ObjectiveEnum.GAIN_WEIGHT -> referenceCalories.times(weightGainMaintainModifier).div(proteinWorthCalories)
         }
 
     }
 
-    private fun calculateReferenceFats(userData: UserData, referenceCalories: Int): Int{
+    private fun calculateReferenceFats(userData: UserData, referenceCalories: Int): Double{
 
         val fatsWorthCalories = 9
         val weightLossModifier = 0.2
         val weightGainMaintainModifier = 0.3
 
         return when(userData.objective){
-            ObjectiveEnum.LOSE_WEIGHT -> referenceCalories.times(weightLossModifier).div(fatsWorthCalories).toInt()
-            ObjectiveEnum.MAINTAIN_WEIGHT -> referenceCalories.times(weightGainMaintainModifier).div(fatsWorthCalories).toInt()
-            ObjectiveEnum.GAIN_WEIGHT -> referenceCalories.times(weightGainMaintainModifier).div(fatsWorthCalories).toInt()
+            ObjectiveEnum.LOSE_WEIGHT -> referenceCalories.times(weightLossModifier).div(fatsWorthCalories)
+            ObjectiveEnum.MAINTAIN_WEIGHT -> referenceCalories.times(weightGainMaintainModifier).div(fatsWorthCalories)
+            ObjectiveEnum.GAIN_WEIGHT -> referenceCalories.times(weightGainMaintainModifier).div(fatsWorthCalories)
         }
 
     }
@@ -295,9 +316,9 @@ class DiaryViewModel @Inject constructor(
 
 data class MacrosSummary(
     val calories: Int,
-    val carbohydrate: Int,
-    val protein: Int,
-    val fat: Int
+    val carbohydrate: Double,
+    val protein: Double,
+    val fat: Double
 )
 
 sealed class UiModel {
@@ -308,6 +329,8 @@ sealed class UiModel {
 
     data class TitleItem(val meal: Meal) : UiModel()
     data class EntryItem(val entry: EntryWithFood) : UiModel()
+
+    data class EntryRecipeItem(val entry: EntryWithRecipe): UiModel()
     data class AddFoodItem(val meal: Meal) : UiModel()
     data class EntrySummaryItem(val macros: MacrosSummary) : UiModel()
 }

@@ -1,24 +1,19 @@
 package com.example.macrostracker.ui.diary.foodList.barcodeScanner
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.macrostracker.R
-import com.example.macrostracker.data.util.ApiResult
 import com.example.macrostracker.databinding.FragmentBarcodeFoodBinding
-import com.example.macrostracker.databinding.FragmentCreateFoodBinding
 import com.example.macrostracker.model.Food
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -154,10 +149,10 @@ class BarcodeFoodFragment : Fragment() {
                                 brand = binding.brandTextField.editText!!.text.toString(),
                                 calories = binding.CaloriesTextField.editText!!.text.toString()
                                     .toInt(),
-                                carbs = binding.CarbsTextField.editText!!.text.toString().toInt(),
-                                fat = binding.FatTextField.editText!!.text.toString().toInt(),
+                                carbs = binding.CarbsTextField.editText!!.text.toString().toDouble(),
+                                fat = binding.FatTextField.editText!!.text.toString().toDouble(),
                                 protein = binding.ProteinTextField.editText!!.text.toString()
-                                    .toInt(),
+                                    .toDouble(),
                                 servingSize = binding.ServingSizeTextField.editText!!.text.toString()
                                     .toInt()
 

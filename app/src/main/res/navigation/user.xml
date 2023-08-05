@@ -34,6 +34,12 @@
                 <action
                     android:id="@+id/action_userFragment_to_userFoodListFragment"
                     app:destination="@id/userFoodListFragment" />
+                <action
+                    android:id="@+id/action_userFragment_to_userRecipeListFragment"
+                    app:destination="@id/userRecipeList" />
+                <action
+                    android:id="@+id/action_userFragment_to_userRecipeList"
+                    app:destination="@id/userRecipeList" />
         </fragment>
         <dialog
             android:id="@+id/setHeightDialogFragment"
@@ -83,4 +89,56 @@
                     android:name="foodName"
                     app:argType="string" />
         </fragment>
+        <navigation android:id="@+id/userRecipeList"
+            app:startDestination="@id/userRecipeListFragment">
+                <fragment
+                    android:id="@+id/userRecipeListFragment"
+                    android:name="com.example.macrostracker.ui.user.userRecipeList.UserRecipeListFragment"
+                    android:label="@string/userRecipeList"
+                    tools:layout="@layout/fragment_user_recipe_list" >
+                        <action
+                            android:id="@+id/action_userRecipeListFragment_to_editRecipeIngredientsFragment"
+                            app:destination="@id/editRecipeIngredientsFragment" />
+                </fragment>
+                <fragment
+                    android:id="@+id/editRecipeIngredientsFragment"
+                    android:name="com.example.macrostracker.ui.user.userRecipeList.editRecipeIngredients.EditRecipeIngredientsFragment"
+                    android:label="{recipeName}">
+                        <argument
+                            android:name="recipeName"
+                            app:argType="string" />
+                        <argument
+                            android:name="recipeId"
+                            app:argType="long" />
+                        <action
+                            android:id="@+id/action_editRecipeIngredientsFragment_to_userDeleteRecipeIngredient"
+                            app:destination="@id/userDeleteRecipeIngredient" />
+                        <action
+                            android:id="@+id/action_editRecipeIngredientsFragment_to_userRecipeIngredientListFragment"
+                            app:destination="@id/userRecipeIngredientListFragment" />
+                </fragment>
+                <dialog
+                    android:id="@+id/userDeleteRecipeIngredient"
+                    android:name="com.example.macrostracker.ui.user.userRecipeList.editRecipeIngredients.UserDeleteRecipeIngredient"
+                    android:label="UserDeleteRecipeIngredient" >
+                        <argument
+                            android:name="foodId"
+                            app:argType="long" />
+                        <argument
+                            android:name="recipeId"
+                            app:argType="long" />
+                </dialog>
+                <fragment
+                    android:id="@+id/userRecipeIngredientListFragment"
+                    android:name="com.example.macrostracker.ui.user.userRecipeList.userRecipeIngredientsList.UserRecipeIngredientListFragment"
+                    android:label="{recipeName}"
+                    tools:layout="@layout/fragment_user_recipe_ingredient_list">
+                        <argument
+                            android:name="recipeName"
+                            app:argType="string" />
+                        <argument
+                            android:name="recipeId"
+                            app:argType="long" />
+                </fragment>
+        </navigation>
 </navigation>

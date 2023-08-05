@@ -8,6 +8,7 @@ data class Entry(
     val date: LocalDate,
     val mealId: Long,
     val foodId: Long?,
+    val recipeId: Long?,
     val servingSize: Int
 )
 
@@ -16,5 +17,6 @@ fun Entry.asEntity() = EntryEntity(
     date = date,
     mealId = mealId,
     foodId = foodId,
+    recipeId = recipeId,
     servingSize = servingSize
 )

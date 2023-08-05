@@ -1,15 +1,15 @@
 package com.example.macrostracker.ui.diary.foodList
 
-import android.util.Log
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.macrostracker.data.repository.FoodRepository
+import com.example.macrostracker.data.repository.RecipeRepository
 import com.example.macrostracker.model.Food
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -18,8 +18,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FoodListViewModel @Inject constructor(
-      private val foodRepository: FoodRepository
+    private val foodRepository: FoodRepository,
+    private val recipeRepository: RecipeRepository
 ) : ViewModel() {
+
+
+     private val _recipeWithFoodList = recipeRepository.getRecipes().stateIn(
+         viewModelScope,
+         SharingStarted.WhileSubscribed(),
+         emptyList()
+     )
 
 
     private val _searchText = MutableStateFlow("")
@@ -30,8 +38,18 @@ class FoodListViewModel @Inject constructor(
         emptyList()
     )
 
+    val recipeWithFood = _searchText.combine(_recipeWithFoodList) {text, recipeList ->
+        if (text.isBlank()) {
+            recipeList
+        } else {
+            recipeList.filter { recipe ->
+                recipe.doesMatchQuery(text)
+            }
+        }
+    }
+
     val foodList = _searchText.combine(_foodList) { text, foodList ->
-        if(text.isBlank()){
+        if (text.isBlank()) {
             foodList
         } else {
             foodList.filter { food ->
@@ -40,18 +58,23 @@ class FoodListViewModel @Inject constructor(
         }
     }
 
-    fun updateSearchText(text: String){
+    fun updateSearchText(text: String) {
         _searchText.update {
             text
         }
     }
 
-    fun deleteFood(foodId: Long){
+    fun deleteFood(foodId: Long) {
         viewModelScope.launch {
             foodRepository.deleteFood(foodId)
         }
     }
 
+    fun deleteRecipe(id: Long){
+        viewModelScope.launch {
+            recipeRepository.deleteRecipe(id)
+        }
+    }
 
 
 }

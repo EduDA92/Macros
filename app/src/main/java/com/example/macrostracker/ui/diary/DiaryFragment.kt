@@ -12,7 +12,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.macrostracker.R
@@ -60,10 +59,17 @@ class DiaryFragment : Fragment() {
                 mealName = mealName
             )
             navController.navigate(action)
-        }) { foodName, foodId, entryId ->
+        }, { foodName, foodId, entryId ->
             val action = DiaryFragmentDirections.actionDiaryFragmentToEditEntryFragment(
                 foodName = foodName,
                 foodId = foodId,
+                entryId = entryId
+            )
+            navController.navigate(action)
+        }) {recipeName, recipeId, entryId ->
+            val action = DiaryFragmentDirections.actionDiaryFragmentToEditRecipeEntryFragment(
+                recipeName = recipeName,
+                recipeId = recipeId,
                 entryId = entryId
             )
             navController.navigate(action)
@@ -72,12 +78,6 @@ class DiaryFragment : Fragment() {
         binding.apply {
             diaryPageRecyclerView.layoutManager = LinearLayoutManager(this@DiaryFragment.context)
             diaryPageRecyclerView.adapter = adapter
-            diaryPageRecyclerView.addItemDecoration(
-                DividerItemDecoration(
-                    this@DiaryFragment.context,
-                    LinearLayoutManager.VERTICAL
-                )
-            )
         }
         adapter.stateRestorationPolicy =
             RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY

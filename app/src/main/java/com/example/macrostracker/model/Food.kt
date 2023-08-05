@@ -7,14 +7,20 @@ data class Food(
     val name: String,
     val brand: String,
     val calories: Int,
-    val fat: Int,
-    val carbs: Int,
-    val protein: Int,
+    val fat: Double,
+    val carbs: Double,
+    val protein: Double,
     val servingSize: Int
 ){
 
     fun doesMatchQuery(query: String): Boolean{
-        return name.contains(query, ignoreCase = true)
+        val matchingCombinations = listOf(
+            name,
+            brand
+        )
+        return matchingCombinations.any{
+            it.contains(query, ignoreCase = true)
+        }
     }
 
 }

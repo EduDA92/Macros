@@ -32,9 +32,9 @@ class DeleteEntryDialogFragment : DialogFragment() {
         const val TAG = "DeleteEntryDialog"
         const val ID = "entryId"
 
-        fun newInstance(entryId: Long) = DeleteEntryDialogFragment().apply {
+        fun newInstance(foodId: Long) = DeleteEntryDialogFragment().apply {
             arguments = Bundle().apply {
-                putLong(ID, entryId)
+                putLong(ID, foodId)
             }
         }
     }
