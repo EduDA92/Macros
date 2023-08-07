@@ -133,8 +133,8 @@
         <fragment
             android:id="@+id/createRecipeFragment"
             android:name="com.example.macrostracker.ui.diary.foodList.createRecipe.CreateRecipeFragment"
-            android:label="fragment_create_recipe"
-            tools:layout="@layout/fragment_create_recipe" >
+            android:label="@string/create_a_recipe"
+            tools:layout="@layout/fragment_create_recipe">
             <action
                 android:id="@+id/action_createRecipeFragment_to_createRecipeIngredientsFragment"
                 app:destination="@id/createRecipeIngredientsFragment" />

@@ -18,6 +18,8 @@ import com.example.macrostracker.R
 import com.example.macrostracker.databinding.FragmentDiaryBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class DiaryFragment : Fragment() {
@@ -26,6 +28,10 @@ class DiaryFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: DiaryViewModel by viewModels()
+
+    private val dateTimeFormatter = DateTimeFormatter.ofPattern("EEEE, LLL dd" )
+
+    private val todayDate = LocalDate.now()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -87,7 +93,12 @@ class DiaryFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.date.collect { date ->
-                        binding.logDateTitle.text = date.toString()
+                        when(date){
+                            todayDate -> binding.logDateTitle.text = resources.getString(R.string.TodayString)
+                            todayDate.plusDays(1) -> binding.logDateTitle.text = resources.getString(R.string.TomorrowString)
+                            todayDate.minusDays(1) -> binding.logDateTitle.text = resources.getString(R.string.YesterdayString)
+                            else -> binding.logDateTitle.text = date.format(dateTimeFormatter)
+                        }
                     }
                 }
                 launch {

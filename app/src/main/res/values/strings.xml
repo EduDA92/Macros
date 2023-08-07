@@ -52,8 +52,8 @@
     <string name="protein">Protein</string>
     <string name="calories">Calories</string>
     <string name="fat">Fat</string>
-    <string name="create_a_food">Create a Food</string>
-    <string name="scan_a_food">Scan a Barcode</string>
+    <string name="create_a_food">Create Food</string>
+    <string name="scan_a_food">Scan Barcode</string>
     <string name="food_name_label">food name</string>
     <string name="food_serving_label">serving size</string>
     <string name="calories_label">calories</string>
@@ -120,7 +120,7 @@
     <string name="userRecipeList">Recipe list</string>
     <string name="deleteFood">delete food</string>
     <string name="content_description_deleteFood">delete food</string>
-    <string name="create_a_recipe">Create a Recipe</string>
+    <string name="create_a_recipe">Create Recipe</string>
     <string name="recipe_name_label">Recipe name</string>
     <string name="recipe_description_label">Recipe description</string>
     <string name="ingredients_title">Ingredients</string>
@@ -134,4 +134,8 @@
     <string name="deleteFoodDialogText">Delete the current food?</string>
     <string name="deleteRecipeDialogTitle">Delete Recipe</string>
     <string name="deleteRecipeDialogText">Delete the current recipe?</string>
+    <string name="MacrosTitle">Macros</string>
+    <string name="TodayString">Today</string>
+    <string name="TomorrowString">Tomorrow</string>
+    <string name="YesterdayString">Yesterday</string>
 </resources>
