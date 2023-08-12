@@ -4,7 +4,7 @@
 
 - The app local storage is built with Room and Proto Datastore for the user related data, and retrieves data from API with Retrofit.
 
-- The dependency injection is managed with Hilt in order to inject the required data into the repositories/Viewmodels
+- The dependency injection is managed with Hilt
 
 - The app uses Flow with Coroutines to represent the data into the UI.
 
