@@ -11,9 +11,13 @@
 - The App also supports Barcode Scanning via Android ML Kit & open food facts API
 
 ## Screenshots:
-|  User Info Screen  |   User Food List   | User Recipe list |
+|  User Info Screen  |   Set Units Dialog   | Set User Data DropDown Dialog |
 | :----------------------: | :----------------------: | :-----------------------: |
-| ![](./screenshots/UserFragment.png) | ![](./screenshots/UserFoodList.png) | ![](./screenshots/UserRecipeList.png)  |
+| ![](./screenshots/UserFragment.png) | ![](./screenshots/Units.png) | ![](./screenshots/ExerciseLevel.png)  |
+
+|  Set User Data Dialog  |   User Food List   | User Recipe list |
+| :----------------------: | :----------------------: | :-----------------------: |
+| ![](./screenshots/setHeight.png) | ![](./screenshots/UserFoodList.png) | ![](./screenshots/UserRecipeList.png)  |
 
 |     Diary Screen     |    Diary Meals Screen   |      MyFoods Screen     |
 | :----------------------------: | :----------------------------: | :----------------------------: |
