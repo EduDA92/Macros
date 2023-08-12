@@ -12,7 +12,7 @@
 
 ## Screenshots:
 |  User Info Screen  |   Set Units Dialog   | Set User Data DropDown Dialog |
-| :----------------------: | :----------------------: | :-----------------------: |
+| :----------------------: | :----------------------: | :----------------------: |
 | ![](./screenshots/UserFragment.png) | ![](./screenshots/Units.png) | ![](./screenshots/ExerciseLevel.png)  |
 
 |  Set User Data Dialog  |   User Food List   | User Recipe list |
